@@ -19,8 +19,11 @@ public class StringCalculator {
 
 
     public int add(String inputNum) {
-        if (inputNum.equals("")) return 0;
-        List<Integer> numbersAsInt = toInt(inputNum);
+        String input;
+        if (inputNum.startsWith("//")) input=changeDelimiter(inputNum);
+        else input=inputNum;
+        if (input.equals("")) return 0;
+        List<Integer> numbersAsInt = toInt(input);
         Integer sum=0;
         for (Integer num: numbersAsInt) {
             sum+=num;
@@ -28,4 +31,10 @@ public class StringCalculator {
         return sum;
     }
 
+    private String changeDelimiter(String inputNum) {
+        String input = inputNum.substring(4);
+        char delimiter = inputNum.charAt(2);
+        input = input.replace(delimiter, ',');
+        return input;
+    }
 }

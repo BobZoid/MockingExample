@@ -36,4 +36,9 @@ public class StringCalcTest {
         assertEquals(7, calc.add("2, 4\n1"));
     }
 
+    @Test
+    void addWithOtherSeparators() {
+        assertEquals(4, calc.add("//;\n1;3"));
+    }
+
 }
