@@ -16,4 +16,9 @@ public class StringCalcTest {
         assertEquals(9, calc.add("4, 5"));
     }
 
+    @Test
+    void addNoInputReturnZero() {
+        assertEquals(0, calc.add(""));
+    }
+
 }

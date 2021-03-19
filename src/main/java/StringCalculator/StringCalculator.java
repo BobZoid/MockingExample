@@ -19,6 +19,7 @@ public class StringCalculator {
 
 
     public int add(String inputNum) {
+        if (inputNum.equals("")) return 0;
         List<Integer> numbersAsInt = toInt(inputNum);
         Integer sum=0;
         for (Integer num: numbersAsInt) {
