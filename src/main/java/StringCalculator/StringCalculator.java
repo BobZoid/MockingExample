@@ -7,7 +7,7 @@ import java.util.List;
 public class StringCalculator {
 
     private List<Integer> toInt(String input) {
-        String[] numbersAsString = input.split(",");
+        String[] numbersAsString = input.split("[,\n]");
         List<Integer> numbersAsInt = new ArrayList<>();
         for (String str: numbersAsString) {
             String strong=str.trim();
