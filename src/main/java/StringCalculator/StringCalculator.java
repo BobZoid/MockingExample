@@ -12,7 +12,7 @@ public class StringCalculator {
         for (String str: numbersAsString) {
             String strong=str.trim();
             int value = Integer.parseInt(strong);
-            numbersAsInt.add(value);
+            if (value<1001) numbersAsInt.add(value);
         }
         return numbersAsInt;
     }

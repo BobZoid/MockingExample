@@ -46,4 +46,9 @@ public class StringCalcTest {
         assertThrows(IllegalArgumentException.class, () -> calc.add("-3, -1"));
     }
 
+    @Test
+    void addIgnoresLargerThan1000() {
+        assertEquals(3, calc.add("1003, 1, 2"));
+    }
+
 }
