@@ -41,4 +41,9 @@ public class StringCalcTest {
         assertEquals(4, calc.add("//;\n1;3"));
     }
 
+    @Test
+    void addWithNegativeValueThrowsException() {
+        assertThrows(IllegalArgumentException.class, () -> calc.add("-3, -1"));
+    }
+
 }

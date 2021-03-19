@@ -18,12 +18,17 @@ public class StringCalculator {
     }
 
 
-    public int add(String inputNum) {
+    public int add(String inputNum){
         String input;
         if (inputNum.startsWith("//")) input=changeDelimiter(inputNum);
         else input=inputNum;
         if (input.equals("")) return 0;
         List<Integer> numbersAsInt = toInt(input);
+        List<Integer> negatives = new ArrayList<>();
+        numbersAsInt.stream().filter(x -> x<0).forEach(negatives::add);
+        if (negatives.size()>0){
+            throw new IllegalArgumentException("Negative values not allowed: " + negatives);
+        }
         Integer sum=0;
         for (Integer num: numbersAsInt) {
             sum+=num;
@@ -37,4 +42,5 @@ public class StringCalculator {
         input = input.replace(delimiter, ',');
         return input;
     }
+
 }
