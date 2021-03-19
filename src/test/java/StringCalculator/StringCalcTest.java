@@ -21,4 +21,9 @@ public class StringCalcTest {
         assertEquals(0, calc.add(""));
     }
 
+    @Test
+    void addInputFiveValues() {
+        assertEquals(15, calc.add("1, 4, 2, 3, 5"));
+    }
+
 }
