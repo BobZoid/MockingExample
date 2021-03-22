@@ -51,4 +51,14 @@ public class StringCalcTest {
         assertEquals(3, calc.add("1003, 1, 2"));
     }
 
+    @Test
+    void addLongerDelimitersAccepted() {
+        assertEquals(6, calc.add("//[***]\n1***2***3"));
+    }
+
+    @Test
+    void addMultipleCustomDelimiters() {
+        assertEquals(6, calc.add("//[*][%]\n1*2%3"));
+    }
+
 }

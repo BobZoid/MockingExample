@@ -39,8 +39,17 @@ public class StringCalculator {
     private String changeDelimiter(String inputNum) {
         String input = inputNum.substring(4);
         char delimiter = inputNum.charAt(2);
+        if (delimiter==('[')) {
+            int endOfDelimiter = inputNum.indexOf("]");
+            String customDelimiter = inputNum.substring(3, endOfDelimiter);
+            input=inputNum.substring(endOfDelimiter+2);
+            input=input.replace(customDelimiter, ",");
+            return input;
+        }
         input = input.replace(delimiter, ',');
         return input;
     }
+
+
 
 }
