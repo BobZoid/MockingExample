@@ -40,16 +40,28 @@ public class StringCalculator {
         String input = inputNum.substring(4);
         char delimiter = inputNum.charAt(2);
         if (delimiter==('[')) {
-            int endOfDelimiter = inputNum.indexOf("]");
-            String customDelimiter = inputNum.substring(3, endOfDelimiter);
-            input=inputNum.substring(endOfDelimiter+2);
-            input=input.replace(customDelimiter, ",");
+            input=customDelimiters(inputNum);
             return input;
         }
         input = input.replace(delimiter, ',');
         return input;
     }
 
+    private String customDelimiters(String input) {
+        int start;
+        int end;
+        while(true) {
+            start = input.indexOf('[');
+            end = input.indexOf(']');
+            String delimiter =input.substring(start+1, end);
+            input=input.substring(end+1);
+            input=input.replace(delimiter, ",");
+            if(input.charAt(0)!='[') break;
+
+        }
+        input=input.substring(1);
+        return input;
+    }
 
 
 }
