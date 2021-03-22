@@ -61,4 +61,9 @@ public class StringCalcTest {
         assertEquals(6, calc.add("//[*][%]\n1*2%3"));
     }
 
+    @Test
+    void MultipleLongCustomDelimiters() {
+        assertEquals(50, calc.add("//[optimus][megatron][starscream]\n20optimus15starscream5megatron10"));
+    }
+
 }
