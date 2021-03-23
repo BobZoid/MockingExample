@@ -6,7 +6,7 @@ import java.util.List;
 
 public class StringCalculator {
 
-    private List<Integer> toInt(String input) {
+    private List<Integer> toInt(final String input) {
         String[] numbersAsString = input.split("[,\n]");
         List<Integer> numbersAsInt = new ArrayList<>();
         for (String str: numbersAsString) {
@@ -18,7 +18,7 @@ public class StringCalculator {
     }
 
 
-    public int add(String inputNum){
+    public int add(final String inputNum){
         String input;
         if (inputNum.startsWith("//")) input=changeDelimiter(inputNum);
         else input=inputNum;
@@ -36,7 +36,7 @@ public class StringCalculator {
         return sum;
     }
 
-    private String changeDelimiter(String inputNum) {
+    private String changeDelimiter(final String inputNum) {
         String input = inputNum.substring(4);
         char delimiter = inputNum.charAt(2);
         if (delimiter==('[')) {
@@ -47,20 +47,19 @@ public class StringCalculator {
         return input;
     }
 
-    private String customDelimiters(String input) {
-        int start;
-        int end;
+    private String customDelimiters(final String input) {
+        String numStr=input;
         while(true) {
-            start = input.indexOf('[');
-            end = input.indexOf(']');
-            String delimiter =input.substring(start+1, end);
-            input=input.substring(end+1);
-            input=input.replace(delimiter, ",");
-            if(input.charAt(0)!='[') break;
+            int start = numStr.indexOf('[');
+            int end = numStr.indexOf(']');
+            String delimiter =numStr.substring(start+1, end);
+            numStr=numStr.substring(end+1);
+            numStr=numStr.replace(delimiter, ",");
+            if(numStr.charAt(0)!='[') break;
 
         }
-        input=input.substring(1);
-        return input;
+        numStr=numStr.substring(1);
+        return numStr;
     }
 
 
