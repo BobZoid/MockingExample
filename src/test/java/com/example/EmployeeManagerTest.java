@@ -49,11 +49,23 @@ class EmployeeManagerTest {
     @Test
     void payEmpRecordsPayments() {
         Employee a = new Employee("a", 1);
+        assertFalse(a.isPaid());
         EmployeeRepository empRepo = mock(EmployeeRepository.class);
         when(empRepo.findAll()).thenReturn(List.of(a));
         BankService bankService = mock(BankService.class);
         EmployeeManager emp = new EmployeeManager(empRepo, bankService);
         emp.payEmployees();
         assertTrue(a.isPaid());
+    }
+
+    @Test
+    void payEmpWhenExceptionThrownNotPaid() {
+        EmployeeRepository empRepo = mock(EmployeeRepository.class);
+        Employee a = new Employee("d", 4);
+        when(empRepo.findAll()).thenReturn(List.of(a, new Employee("a", 1), new Employee("b", 2), new Employee("c", 3)));
+        BankService bankService = mock(BankService.class);
+        doThrow(new RuntimeException()).when(bankService).pay("d", 4);
+        EmployeeManager emp = new EmployeeManager(empRepo, bankService);
+        assertFalse(a.isPaid());
     }
 }
