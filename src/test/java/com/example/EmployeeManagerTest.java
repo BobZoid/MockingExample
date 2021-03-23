@@ -45,4 +45,15 @@ class EmployeeManagerTest {
         EmployeeManager emp = new EmployeeManager(empRepo, bankService);
         assertEquals(0, emp.payEmployees());
     }
+
+    @Test
+    void payEmpRecordsPayments() {
+        Employee a = new Employee("a", 1);
+        EmployeeRepository empRepo = mock(EmployeeRepository.class);
+        when(empRepo.findAll()).thenReturn(List.of(a));
+        BankService bankService = mock(BankService.class);
+        EmployeeManager emp = new EmployeeManager(empRepo, bankService);
+        emp.payEmployees();
+        assertTrue(a.isPaid());
+    }
 }
