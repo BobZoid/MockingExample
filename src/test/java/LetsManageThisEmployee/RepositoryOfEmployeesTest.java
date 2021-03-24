@@ -1,7 +1,10 @@
 package LetsManageThisEmployee;
 
 import com.example.Employee;
+import com.example.EmployeeRepository;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,4 +32,18 @@ public class RepositoryOfEmployeesTest {
         assertEquals("c", empList.get(0).getId());
         assertEquals(3, empList.get(0).getSalary());
     }
+
+    @Test
+    public void constructorWithList() {
+        Employee a = new Employee("a", 1);
+        Employee b = new Employee("b", 2);
+        Employee c = new Employee("c", 3);
+        RepositoryOfEmployees empRepo2 = new RepositoryOfEmployees(List.of(a,b,c));
+        assertEquals(3, empRepo2.findAll().size());
+        assertTrue(empRepo2.findAll().contains(a));
+        assertTrue(empRepo2.findAll().contains(b));
+        assertTrue(empRepo2.findAll().contains(c));
+    }
+
+
 }
