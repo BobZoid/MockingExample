@@ -9,9 +9,9 @@ import java.util.List;
 public class RepositoryOfEmployees implements EmployeeRepository {
     List<Employee> empRepo = new ArrayList<>();
 
-    public void RepositoryOfEmployees() {}
+    RepositoryOfEmployees() {}
 
-    public void RepositoryOfEmployees(List<Employee> repo) {
+    RepositoryOfEmployees(List<Employee> repo) {
         empRepo=repo;
     }
 
@@ -23,6 +23,7 @@ public class RepositoryOfEmployees implements EmployeeRepository {
     @Override
     public Employee save(Employee e) {
         empRepo.add(e);
-        return empRepo.
+        int index = empRepo.indexOf(e);
+        return empRepo.get(index);
     }
 }
