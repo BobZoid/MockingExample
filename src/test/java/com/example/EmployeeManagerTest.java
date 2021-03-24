@@ -1,10 +1,7 @@
 package com.example;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.stubbing.OngoingStubbing;
-
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -61,11 +58,14 @@ class EmployeeManagerTest {
     @Test
     void payEmpWhenExceptionThrownNotPaid() {
         EmployeeRepository empRepo = mock(EmployeeRepository.class);
-        Employee a = new Employee("d", 4);
-        when(empRepo.findAll()).thenReturn(List.of(a, new Employee("a", 1), new Employee("b", 2), new Employee("c", 3)));
+        Employee testEmployee = new Employee("d", 4);
+        when(empRepo.findAll()).thenReturn(List.of(testEmployee,
+                new Employee("a", 1),
+                new Employee("b", 2),
+                new Employee("c", 3)));
         BankService bankService = mock(BankService.class);
         doThrow(new RuntimeException()).when(bankService).pay("d", 4);
         EmployeeManager emp = new EmployeeManager(empRepo, bankService);
-        assertFalse(a.isPaid());
+        assertFalse(testEmployee.isPaid());
     }
 }
