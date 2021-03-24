@@ -64,8 +64,9 @@ class EmployeeManagerTest {
                 new Employee("b", 2),
                 new Employee("c", 3)));
         BankService bankService = mock(BankService.class);
-        doThrow(new RuntimeException()).when(bankService).pay("d", 4);
+        doThrow(new RuntimeException()).when(bankService).pay("d", 4);//Problem här
         EmployeeManager emp = new EmployeeManager(empRepo, bankService);
+        emp.payEmployees();
         assertFalse(testEmployee.isPaid());
     }
 }

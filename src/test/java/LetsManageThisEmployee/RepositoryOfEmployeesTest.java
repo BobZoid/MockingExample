@@ -45,5 +45,13 @@ public class RepositoryOfEmployeesTest {
         assertTrue(empRepo2.findAll().contains(c));
     }
 
+    @Test
+    public void equalIdOverWritesPreviousEntry() {
+        empRepo.save(new Employee("a", 1));
+        empRepo.save(new Employee("a", 2));
+        assertEquals(1, empRepo.findAll().size());
+        assertEquals("a", empRepo.findAll().get(0).getId());
+        assertEquals(2, empRepo.findAll().get(0).getSalary());
+    }
 
 }

@@ -22,6 +22,13 @@ public class RepositoryOfEmployees implements EmployeeRepository {
 
     @Override
     public Employee save(Employee e) {
+        Employee employeeToDelete = empRepo.stream()
+                .filter(emp -> emp.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+        if (employeeToDelete!=null) {
+            empRepo.remove(employeeToDelete);
+        }
         empRepo.add(e);
         int index = empRepo.indexOf(e);
         return empRepo.get(index);
