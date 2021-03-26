@@ -13,10 +13,11 @@ import static org.mockito.Mockito.mock;
 
 public class IT {
     BankService bankService = mock(BankService.class);
-    EmployeeManager manager = new EmployeeManager(new RepositoryOfEmployees(List.of(
+    RepositoryOfEmployees empRepo = new RepositoryOfEmployees(List.of(
             new Employee("a", 1),
             new Employee("b", 2),
-            new Employee("c", 3))), bankService);
+            new Employee("c", 3)));
+    EmployeeManager manager = new EmployeeManager(empRepo, bankService);
 
     @Test
     public void payEmployees() {
@@ -27,5 +28,15 @@ public class IT {
     public void payEmployeesCatchesException() {
         doThrow(new RuntimeException()).when(bankService).pay("a", 1);
         assertEquals(2, manager.payEmployees());
+        Employee a = empRepo.findAll().get(0);
+        Employee b = empRepo.findAll().get(1);
+        assertFalse(a.isPaid());
+        assertTrue(b.isPaid());
+    }
+
+    @Test
+    public void payEmployeeNoDataReturnsZero() {
+        EmployeeManager manager2 = new EmployeeManager(new RepositoryOfEmployees(), bankService);
+        assertEquals(0, manager2.payEmployees());
     }
 }
